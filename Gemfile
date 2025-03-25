@@ -45,3 +45,5 @@ group :development do
   # gem "spring"
 end
 
+
+gem "clerk-sdk-ruby", "~> 4.0"
