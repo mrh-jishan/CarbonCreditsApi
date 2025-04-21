@@ -46,4 +46,6 @@ group :development do
 end
 
 
-gem "clerk-sdk-ruby", "~> 4.0"
+gem "clerk-sdk-ruby", "~> 4.0", require: "clerk"
+
+gem "dotenv-rails", "~> 3.1"

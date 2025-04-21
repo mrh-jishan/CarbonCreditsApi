@@ -1,2 +1,32 @@
 class ApplicationController < ActionController::API
+  include Clerk::Authenticatable
+  before_action :require_clerk_session!
+
+  
+  protected
+
+  # If the user is not authenticated, redirect to the sign-in page
+  def require_clerk_session!
+    session_token = request.headers["Authorization"]&.split("Bearer ")&.last
+
+    unless session_token
+      render json: { error: "Unauthorized: No session token provided" }, status: :unauthorized
+      return
+    end
+    
+    # puts "Session token-----------: #{session_token}"
+
+    clerk = Clerk::SDK.new
+
+    begin
+      clerk_session =  clerk.verify_token(session_token)
+      puts "Session verified---------: #{clerk_session}"
+
+      # puts "User ID-----------------: #{clerk.user}"
+    rescue Clerk::Errors::BaseError => e
+      render json: { error: "Unauthorized: #{e.message}" }, status: :unauthorized
+      return
+    end
+  end
+  
 end
