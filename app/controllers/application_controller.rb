@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::API
   include Clerk::Authenticatable
   before_action :require_clerk_session!
+  # before_action :require_reverification!
 
   
   protected
@@ -14,15 +15,14 @@ class ApplicationController < ActionController::API
       return
     end
     
-    # puts "Session token-----------: #{session_token}"
+    puts "Session token-----------: #{session_token}"
 
     clerk = Clerk::SDK.new
 
     begin
-      clerk_session =  clerk.verify_token(session_token)
-      puts "Session verified---------: #{clerk_session}"
-
-      # puts "User ID-----------------: #{clerk.user}"
+      @clerk_session =  clerk.verify_token(session_token)
+      puts "Session verified---------: #{     @clerk_session}"
+      puts "User ID-----------------: #{     @clerk_session['sub']}"
     rescue Clerk::Errors::BaseError => e
       render json: { error: "Unauthorized: #{e.message}" }, status: :unauthorized
       return

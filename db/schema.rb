@@ -15,12 +15,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_21_064116) do
   enable_extension "plpgsql"
 
   create_table "users", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
     t.string "email"
-    t.string "role"
+    t.string "org_slug"
+    t.string "clerk_user_id"
+    t.string "org_role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end

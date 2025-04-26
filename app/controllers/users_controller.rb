@@ -14,7 +14,21 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    @user = User.new(user_params)
+
+    email = params[:email]
+    unless email
+      render json: { error: "Email is required" }, status: :unprocessable_entity
+      return
+    end
+
+
+  @user = User.find_or_initialize_by(email: email)
+
+  @user.assign_attributes(
+    org_slug: @clerk_session['org_slug'],
+    clerk_user_id: @clerk_session['sub'],
+    org_role: @clerk_session['org_role']
+  )
 
     if @user.save
       render json: @user, status: :created, location: @user
