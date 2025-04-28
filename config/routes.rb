@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :locations
   scope :api do 
     resources :users
   end

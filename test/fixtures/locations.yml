@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  latitude: MyString
+  longitude: MyString
+  speed: 1.5
+  timestamp: 2025-04-26 02:18:31
+
+two:
+  latitude: MyString
+  longitude: MyString
+  speed: 1.5
+  timestamp: 2025-04-26 02:18:31
