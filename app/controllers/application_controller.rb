@@ -15,14 +15,14 @@ class ApplicationController < ActionController::API
       return
     end
     
-    puts "Session token-----------: #{session_token}"
+    # puts "Session token-----------: #{session_token}"
 
     clerk = Clerk::SDK.new
 
     begin
       @clerk_session =  clerk.verify_token(session_token)
-      puts "Session verified---------: #{     @clerk_session}"
-      puts "User ID-----------------: #{     @clerk_session['sub']}"
+      # puts "Session verified---------: #{     @clerk_session}"
+      # puts "User ID-----------------: #{     @clerk_session['sub']}"
       @current_user = User.find_or_initialize_by(clerk_user_id: @clerk_session['sub'])
     rescue Clerk::Errors::BaseError => e
       render json: { error: "Unauthorized: #{e.message}" }, status: :unauthorized

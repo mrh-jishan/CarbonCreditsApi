@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  resources :locations
+
   scope :api do 
     resources :users
+    resources :locations
+    resources :employers
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
