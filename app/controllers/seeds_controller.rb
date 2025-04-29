@@ -21,6 +21,6 @@ class SeedsController < ApplicationController
     commute4.locations.create!(latitude: 37.7749, longitude: -122.4194, created_at: '2025-04-03 07:30:00', updated_at: '2025-04-03 07:30:00') # San Francisco
     commute4.locations.create!(latitude: 37.8044, longitude: -122.2711, created_at: '2025-04-03 08:15:00', updated_at: '2025-04-03 08:15:00') # Oakland
 
-    render json: {}, status: :ok
+    render json: [commute1, commute2, commute3, commute4], status: :ok
   end
 end

@@ -24,6 +24,7 @@ class ApplicationController < ActionController::API
       # puts "Session verified---------: #{     @clerk_session}"
       # puts "User ID-----------------: #{     @clerk_session['sub']}"
       @current_user = User.find_or_initialize_by(clerk_user_id: @clerk_session['sub'])
+      @current_user.save
     rescue Clerk::Errors::BaseError => e
       render json: { error: "Unauthorized: #{e.message}" }, status: :unauthorized
       return
