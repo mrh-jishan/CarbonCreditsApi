@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show update destroy ]
+  before_action :set_user, only: %i[ update destroy ]
 
   # GET /users
   def index
@@ -10,12 +10,21 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: @user
+
+    user_id =  params[:id]
+    users = Clerk::SDK.new.users
+    organization_memberships = Clerk::SDK.new.organization_memberships
+
+    user_roles = organization_memberships.list_organization_memberships('org_2vLMkZCAXOv6VCUPj24tb6Md5OV', query_params: { user_id: user_id}) 
+    # puts "User ID------------------------: #{params[:id]}"
+    user = users.get_user(user_id)
+    render json: {user: user, role: user_roles}, status: :ok
+
+    # render json: @user
   end
 
   # POST /users
   def create
-
     email = params[:email]
     unless email
       render json: { error: "Email is required" }, status: :unprocessable_entity
