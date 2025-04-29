@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   scope :api do 
     resources :users
+    resources :seeds
     resources :commutes do 
       resources :locations, only: [:create]
     end
