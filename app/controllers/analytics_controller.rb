@@ -1,9 +1,13 @@
 class AnalyticsController < ApplicationController
 
   def index
-    
-    commutes = @current_user.commutes.includes(:locations) # Include location data
 
+    if params[:scope] == "all"
+      commutes = Commute.includes(:locations) # Include location data
+    else
+      commutes = @current_user.commutes.includes(:locations) # Include location data
+    end
+    
     points_per_mode = {
       "public_transport" => 100,
       "carpooling" => 80,
