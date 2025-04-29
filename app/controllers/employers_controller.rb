@@ -2,7 +2,7 @@ class EmployersController < ApplicationController
 
   def index
     organization_memberships = Clerk::SDK.new.organization_memberships
-    list_organization_memberships = organization_memberships.list_organization_memberships('org_2vLMkZCAXOv6VCUPj24tb6Md5OV', list_organization_memberships_request: {limit: 10, offset: 0, role: [ 'org:carbon_credits_employer' ]})    
+    list_organization_memberships = organization_memberships.list_organization_memberships('org_2vLMkZCAXOv6VCUPj24tb6Md5OV', query_params: { role: 'org:carbon_credits_employer'})    
     render json: list_organization_memberships, status: :ok
   end
   

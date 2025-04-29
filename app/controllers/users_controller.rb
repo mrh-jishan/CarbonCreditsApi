@@ -3,8 +3,9 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.all
-    render json: @users
+    organization_memberships = Clerk::SDK.new.organization_memberships
+    list_organization_memberships = organization_memberships.list_organization_memberships('org_2vLMkZCAXOv6VCUPj24tb6Md5OV')    
+    render json: list_organization_memberships, status: :ok
   end
 
   # GET /users/1

@@ -1,5 +1,6 @@
-Clerk.configure do |c|
-  c.secret_key = ENV['CLERK_SECRET_KEY'] 
-  c.publishable_key = ENV['CLERK_PUBLISHABLE_KEY'] 
-  c.logger = Logger.new(STDOUT) 
+Clerk.configure do |config|
+  config.secret_key = ENV['CLERK_SECRET_KEY'] 
+  config.publishable_key = ENV['CLERK_PUBLISHABLE_KEY'] 
+  config.logger = Logger.new(STDOUT) 
+  config.debug = true
 end
