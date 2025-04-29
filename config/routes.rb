@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   scope :api do 
     resources :users
-    resources :locations
+    resources :commutes do 
+      resources :locations, only: [:create]
+    end
     resources :employers
     resources :employees
     resources :carbon_credits
