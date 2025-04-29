@@ -10,6 +10,12 @@ class CommutesController < ApplicationController
     end
   end
 
+
+  def index
+    @commutes = @current_user.commutes.includes(:location)
+    render json: @commutes.as_json(include: :location), status: :ok
+  end
+
   protected
 
 

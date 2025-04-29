@@ -49,3 +49,5 @@ end
 gem "clerk-sdk-ruby", "~> 4.0", require: "clerk"
 
 gem "dotenv-rails", "~> 3.1"
+
+gem "geocoder", "~> 1.8"

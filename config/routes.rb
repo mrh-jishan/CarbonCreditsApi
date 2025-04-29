@@ -5,9 +5,11 @@ Rails.application.routes.draw do
     resources :commutes do 
       resources :locations, only: [:create]
     end
+    resources :analytics
     resources :employers
     resources :employees
     resources :carbon_credits
+    resources :transactions
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
